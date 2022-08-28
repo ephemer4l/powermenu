@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+black="#1E1E2E" 
+sky="#89DCEB"
+mauve="#DDB6F2" 
+peach="#F8BD96"
+green="#ABE9B3"
+options="ﰸ cancel\n勒 reboot\n襤 shutdown"
+selected=$(echo -e $options \
+	| bemenu \
+	--prefix '' \
+	--prompt 'powermenu  ' \
+	--list 3 \
+	--fn 'monospace 10' \
+	--tb $black \
+	--tf $sky \
+	--fb $black \
+	--ff "#E856A0" \
+	--nb $black \
+	--nf "#4FB0ED" \
+	--hb $black \
+	--hf $sky)
+
+if [[ "$selected" == *"cancel"* ]]; then
+	:
+elif [[ "$selected" == *"shutdown"* ]]; then
+	loginctl poweroff
+elif [[ "$selected" == *"reboot"* ]]; then
+	loginctl reboot
+fi
